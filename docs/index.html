@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Joe's Hotdogs</title>
+</head>
+<body>
+    <h1> Joe's Hotdogs! </h1>
+    <h2>Family Owned and Operated since 2021</h2>
+    <div class="checker"></div>
+    <h3>Your order:</h3>
+    <script>
+        function getQuantity(food, price) {
+            let q = "x";
+            price = price.toFixed(2);
+            while (isNaN(q)) {
+                q = prompt(`How many ${food} (${price}) do you want?`, "");
+                q = parseInt(q);
+            }
+            return q;
+        }
+        let quantities = [0, 0, 0];
+        let prices = [3.25, 2.00, 1.50]
+        quantities[0] = getQuantity("hotdogs", prices[0]);
+        quantities[1] = getQuantity("french fries", prices[1]);
+        quantities[2] = getQuantity("drinks", prices[2]);
+        let subtotal = 0;
+        for (let i in quantities) {
+            subtotal += quantities[i] * prices[i]; 
+        }
+        console.log(subtotal);
+        discount = (subtotal >= 20) ? (subtotal * .9) : subtotal;
+        console.log(discount);
+        tax = .0625 * discount;
+        let doc = `<div class="displaygrid">
+                   <div class="r1c1">Hotdogs ($${prices[0].toFixed(2)} x ${quantities[0]})</div>
+                   <div class="r2c1">French Fries ($${prices[1].toFixed(2)} x ${quantities[1]})</div>
+                   <div class="r3c1">Drinks ($${prices[2].toFixed(2)} x ${quantities[2]})</div>
+                   <div class="r4c1">Subtotal</div>
+                   <div class="r6c1">Tax</div>
+                   <div class="r7c1">Total</div>
+                   <div class="r1c2">$${(quantities[0] * prices[0]).toFixed(2)}</div>
+                   <div class="r2c2">$${(quantities[1] * prices[1]).toFixed(2)}</div>
+                   <div class="r3c2">$${(quantities[2] * prices[2]).toFixed(2)}</div>
+                   <div class="r4c2">$${subtotal.toFixed(2)}</div>
+                   <div class="r6c2">$${tax.toFixed(2)}</div>
+                   <div class="r7c2">$${(discount + tax).toFixed(2)}</div>
+                `
+        if (subtotal !== discount) {
+            doc += `<div class="r5c1">Joe's Discount</div>
+                    <div class="r5c2">$${(discount - subtotal).toFixed(2)}</div>
+                   `
+        }
+        doc += "</div>";
+        document.write(doc);
+    </script>
+</body>
+</html>
