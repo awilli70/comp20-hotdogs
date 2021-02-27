@@ -31,9 +31,7 @@
         for (let i in quantities) {
             subtotal += quantities[i] * prices[i]; 
         }
-        console.log(subtotal);
         discount = (subtotal >= 20) ? (subtotal * .9) : subtotal;
-        console.log(discount);
         tax = .0625 * discount;
         let doc = `<div class="displaygrid">
                    <div class="r1c1">Hotdogs ($${prices[0].toFixed(2)} x ${quantities[0]})</div>
